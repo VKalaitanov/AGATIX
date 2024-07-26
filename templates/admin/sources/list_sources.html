@@ -1,0 +1,87 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+
+{% block content %}
+    <h1>Clicks buying</h1>
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        <tr>
+            <th>Source</th>
+            <th>Type</th>
+            <th>Format</th>
+            <th>Geo</th>
+            <th>Buying now</th>
+            <th>On moderation</th>
+            <th>After moderation</th>
+        </tr>
+        {% for source in sources_statistics %}
+            <tr>
+                <th>{{ source.source__name }}</th>
+                <th>{{ source.type }}</th>
+                <th>{{ source.format }}</th>
+                <th>{{ source.geo }}</th>
+                {% if source.current %}
+                    <th>{{ source.current }}</th>
+                {% else %}
+                    <th>0</th>
+                {% endif %}
+
+                {% if source.delta %}
+                    <th>{{ source.delta }}</th>
+                {% else %}
+                    <th>0</th>
+                {% endif %}
+
+                {% if source.future %}
+                    <th>{{ source.future }}</th>
+                {% else %}
+                    <th>0</th>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    <h1>Sources list</h1>
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        {% if user.is_admin %}
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>System ID</th>
+                <th>Edit</th>
+            </tr>
+            {% for source in sources %}
+                <tr>
+                    <th>{{ source.id }}</th>
+                    <th>{{ source.name }}</th>
+                    <th>{{ source.system_id }}</th>
+                    <th>
+                        <form action="{% url 'platform_main:admin_update_source' source.id %}" method="get">
+                            <button>Edit</button>
+                        </form>
+                    </th>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>System ID</th>
+            </tr>
+            {% for source in sources %}
+                <tr>
+                    <th>{{ source.id }}</th>
+                    <th>{{ source.name }}</th>
+                    <th>{{ source.system_id }}</th>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    {% if user.is_admin %}
+        <form action="{% url 'platform_main:admin_create_source' %}" method="get">
+            <button>Create new source</button>
+        </form>
+    {% endif %}
+{% endblock %}

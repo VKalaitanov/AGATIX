@@ -1,0 +1,27 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+{% block content %}
+    <form action="{% url 'platform_main:admin_accounts_list' %}" method="get">
+        <button>Back to all accounts</button>
+    </form>
+
+    <form action="{% url 'platform_main:admin_account' id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Save"></p>
+    </form>
+    <p>
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+    </p>
+    <p>
+        {% if message %}
+            {{ message }}
+        {% endif %}
+    </p>
+{% endblock %}

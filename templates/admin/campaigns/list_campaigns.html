@@ -1,0 +1,98 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+
+{% block content %}
+    <div class="settings">
+        <form action="{% url 'platform_main:admin_campaigns_list' %}" method="get">
+            <label for="selectoStatusr" style="font-size:10px">Campaign status</label>
+            <select name="status" id="selectoStatusr">
+                <option>All</option>
+                <option>Active</option>
+                <option>Stopped</option>
+                <option>Waiting for moderation</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    <form action="{% url 'platform_main:admin_campaign_create' %}" method="get">
+        <button>Create campaign</button>
+    </form>
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        <tr>
+            <th>id</th>
+            {% if campaigns %}
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            {% endif %}
+            <th>Clicks today</th>
+            <th>Clicks required</th>
+            <th>Format</th>
+            <th>Type</th>
+            <th>Click price</th>
+            <th>Partner email</th>
+            <th>Campaign name</th>
+        </tr>
+        {% for campaign in campaigns %}
+            <tr>
+                <td>{{ campaign.id }}</td>
+                <td class={{ campaign.get_css_class }}>
+                    <form action="{% url 'platform_main:admin_campaign_delete' campaign.id %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-default">
+                            <img class="signs" src={% static "admin/campaigns/bin.svg" %}>
+                        </button>
+                    </form>
+                </td>
+                <td class={{ campaign.get_css_class }}>
+                    <form action="{% url 'platform_main:campaigns_statistics' campaign.id %}" method="get" novalidate>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-default">
+                            <img class="signs" src={% static "admin/campaigns/graph.svg" %}>
+                        </button>
+                    </form>
+                </td>
+                <td class={{ campaign.get_css_class }}>
+                    {% if campaign.current_status == 'running' %}
+                        <form action="{% url 'platform_main:admin_campaign_action_stop' campaign.id %}" method="post"
+                              novalidate>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-default">
+                                <img class="signs" src={% static campaign.get_button_src %}>
+                            </button>
+                        </form>
+                    {% elif campaign.current_status == 'stopped' %}
+                        <form action="{% url 'platform_main:admin_campaign_action_start' campaign.id %}" method="post"
+                              novalidate>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-default">
+                                <img class="signs" src={% static campaign.get_button_src %}>
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% if campaign.next_status is not None %}
+                        ({{ campaign.next_status }})
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{% url 'platform_main:admin_campaign' campaign.id %}" method="get">
+                        <button>Edit</button>
+                    </form>
+                </td>
+                <td>{{ campaign.clicks_today }}</td>
+                <td>{{ campaign.clicks_per_day }}</td>
+                <td>{{ campaign.get_format_display }}</td>
+                <td>{{ campaign.get_type_display }}</td>
+                <td>{{ campaign.price }}</td>
+                <td>{{ campaign.user.email }}</td>
+                <td>{{ campaign.name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

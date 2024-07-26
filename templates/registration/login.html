@@ -1,0 +1,21 @@
+{% load rest_framework %}
+
+<html>
+<body>
+<form action="{% url 'platform_main:register' %}" method="get">
+    <p>No account?</p>
+    <button>Create new</button>
+</form>
+
+<form action="{% url 'platform_main:login' %}" method="post" novalidate>
+    {% csrf_token %}
+    {% render_form serializer template_pack='rest_framework/vertical' %}
+    <button type="submit" class="btn btn-default">Sign in</button>
+</form>
+<p>
+    {% if message %}
+        {{ message }}
+    {% endif %}
+</p>
+</body>
+</html>

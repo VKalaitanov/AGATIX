@@ -1,0 +1,63 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <div class="main__wrapper">
+        <div class="container">
+            <div class="page-head">
+                <div class="big-title">Statistics</div>
+            </div>
+
+            <ul class="tabs list-reset">
+                <li class="tab">
+                    <button class="tab__button tab__button_active" data-date="Today">Today</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Yesterday">Yesterday</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Current week">Current week</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Last week">Last week</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Current month">Current month</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Last month">Last month</button>
+                </li>
+            </ul>
+
+            <div class="statistics__total">
+                <div class="statistics__total-title small-title"></div>
+                <div style="font-size: 15px" class="statistics__spent-title small-title"></div>
+
+                <div class="switcher switcher_statistics admin-accounts__switcher">
+                    <label class="switcher__button">
+                        <input class="switcher__input" name="switch-1" type="radio" value="stop" checked>
+                        success
+                    </label>
+                    <label class="switcher__button">
+                        <input class="switcher__input" name="switch-1" type="radio" value="run">
+                        failed
+                    </label>
+                    <div class="switcher__holder"></div>
+                </div>
+
+            </div>
+
+            <div class="statistics__chart">
+                <canvas class="statistics__graph" id="admin-statistics-chart" aria-label="Chart" role="img"></canvas>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

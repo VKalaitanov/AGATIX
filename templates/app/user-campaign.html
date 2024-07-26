@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" class="page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#111111">
+  <title>agatix</title>
+  <meta name="description" content="Web App">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<header class="header">
+  <div class="header__container container">
+    <a class="header__logo" href="user-index.html">
+      <img src="img/logo.svg" alt="Логотип" loading="lazy" width="157" height="49">
+    </a>
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li class="header__item">
+          <a class="header__link" href="user-index.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#home"></use>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-campaign.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#users"></use>
+            </svg>
+            Campaign
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-statistics.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#graph"></use>
+            </svg>
+            Statistics
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-payments.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#money"></use>
+            </svg>
+            Payments
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header__info">
+      <div class="header__balance">
+        <svg class="sprite header__currency" viewBox="0 0 24 24" width="24" height="24">
+          <use href="img/sprite.svg#oval-dollar"></use>
+        </svg>
+        483.46
+      </div>
+      <div class="header__user">
+        <div class="header__content">
+          <div class="header__name">Victor</div>
+          <div class="header__mail small-text">test_victor@gmail.com</div>
+        </div>
+      </div>
+
+      <!-- if you need to use button just uncomment under code -->
+      <!--<button class="header__logout">
+        @<svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#logout"></use>
+</svg>
+      </button>-->
+      <a class="header__logout" href="login.html" aria-label="Logout">
+        <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+          <use href="img/sprite.svg#logout"></use>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main main_without-margin">
+  <div class="main__wrapper">
+    <div class="container">
+      <div class="page-head page-head_small">
+        <div class="big-title">Campaign</div>
+        <button class="button button_transparent" data-modal-id="add-modal">
+          <svg class="sprite table__filter-icon" viewBox="0 0 24 24" width="24" height="24">
+            <use href="img/sprite.svg#plus"></use>
+          </svg>
+          new campaign
+        </button>
+      </div>
+      <div class="table__filters">
+        <div class="table__filter table__filter_search">
+          <div class="table__filter-label">Campaign name or ID </div>
+          <input type="text" class="input_search input" placeholder="Enter">
+        </div>
+        <div class="table__filter table__filter_status" id="status">
+          <div class="table__filter-label">Status</div>
+        </div>
+        <div class="table__filter table__filter_geo" id="geo">
+          <div class="table__filter-label">Geo</div>
+        </div>
+        <div class="table__filter table__filter_type" id="type">
+          <div class="table__filter-label">Type</div>
+        </div>
+        <div class="table__filter table__filter_os" id="os">
+          <div class="table__filter-label">OS</div>
+        </div>
+        <div class="table__filter">
+          <button class="button button_dark">apply</button>
+        </div>
+        <div class="table__filter">
+          <button class="button button_transparent">clear</button>
+        </div>
+      </div>
+      <div class="table__outer">
+        <table class="user-campaign__table">
+          <thead>
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Daily cap</td>
+            <td>Today</td>
+            <td>Type</td>
+            <td>Format</td>
+            <td>Platform</td>
+            <td>OS</td>
+            <td>Geo</td>
+            <td>Price</td>
+            <td>Status</td>
+            <td>Actions</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>0016</td>
+            <td>Test using email</td>
+            <td>3000</td>
+            <td>000</td>
+            <td>No email</td>
+            <td>Redirect</td>
+            <td>Mobile</td>
+            <td><img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon"><img
+              src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon"></td>
+            <td><img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="icon"></td>
+            <td>0.190</td>
+            <td>
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-1" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-1" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-1" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+
+          <!-- under is all repeat you can dalete code under -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-2" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-2" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-2" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-3" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-3" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-3" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-4" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-4" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-4" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-5" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-5" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-5" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-6" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-6" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-6" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-7" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-7" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-7" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-8" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-8" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-8" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              0016
+            </td>
+            <td>
+              Test using email
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              3000
+            </td>
+            <td>
+              No email
+            </td>
+            <td>
+              Redirect
+            </td>
+            <td>
+              Mobile
+            </td>
+            <td>
+              <img src="img/icons/apple.svg" loading="lazy" width="24" height="25" alt="icon apple">
+              <img src="img/icons/android.svg" loading="lazy" width="24" height="25" alt="icon android">
+            </td>
+            <td>
+              <img src="img/icons/usa-flag.svg" loading="lazy" width="25" height="25" alt="flag usa">
+            </td>
+            <td>
+              0.190
+            </td>
+            <td>
+
+              <div class="switcher user-campaign">
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-9" type="radio" value="stop" checked>
+                  stop
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-9" type="radio" value="wait">
+                  wait
+                </label>
+                <label class="switcher__button">
+                  <input class="switcher__input" name="switch-9" type="radio" value="run">
+                  run
+                </label>
+                <div class="switcher__holder"></div>
+              </div>
+
+            </td>
+            <td>
+              <div class="td-buttons">
+
+                <button class="button-edit td-buttons__edit" aria-label="edit" data-modal-id="edit-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#pencil"></use>
+                  </svg>
+
+                </button>
+
+                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal">
+
+                  <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#basket"></use>
+                  </svg>
+
+                </button>
+
+                <a class="button-stat @class" aria-label="info" href="user-statistics.html">
+                  <svg class="sprite button-stat__icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#graph"></use>
+                  </svg>
+                </a>
+
+              </div>
+            </td>
+          </tr>
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination__footer">
+        <div class="pagination__pages">
+          <button class="pagination__page-arrow pagination__page-prev" aria-label="prev page">
+            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#small-arrow"></use>
+            </svg>
+          </button>
+          <div class="pagination__page">
+            Page 1
+          </div>
+          <button class="pagination__page-arrow pagination__page-next" aria-label="next page">
+            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#small-arrow"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer__container container">
+    <ul class="footer__links">
+      <li class="footer__item">
+        <a href="#" class="footer__link">Privacy Policy</a>
+      </li>
+      <li class="footer__item"><a href="#" class="footer__link">Terms </a></li>
+      <li class="footer__item">
+        <a href="#" class="footer__link">Contacts</a>
+      </li>
+    </ul>
+    <div class="footer__terms">©️ 2024 Agatix. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<div class="modal" data-modal-name="add-modal" role="alertdialog" aria-labelledby="add-title"
+     aria-label="Add new campaign">
+  <div class="modal__holder"></div>
+  <div class="modal__container">
+    <button class="modal__close" aria-label="Close modal"></button>
+    <div class="modal__content">
+      <form class="add-modal__form">
+        <div class="add-modal__title title" id="add-title">Add new campaign</div>
+
+        <ul class="add-modal__inputs">
+          <li class="add-modal__li">
+            <label class="add-modal__label">
+              <span class="add-modal__text">Name</span>
+              <input class="add-modal__input input" type="text" placeholder="Enter">
+            </label>
+          </li>
+          <li class="add-modal__li">
+            <label class="add-modal__label">
+              <span class="add-modal__text">Link</span>
+              <input class="add-modal__input input" type="text" placeholder="Enter">
+            </label>
+          </li>
+          <li class="add-modal__li">
+            <label class="add-modal__label" id="modal-geo">
+              <span class="add-modal__text">Geo</span>
+            </label>
+          </li>
+          <li class="add-modal__li">
+            <div class="add-modal__label">
+              <span class="add-modal__text">Clicks per day</span>
+              <span class="number">
+    <button class="number-plus" type="button" aria-label="plus"
+            onclick="this.nextElementSibling.stepUp(); this.nextElementSibling.onchange();"></button>
+    <input type="number" min="0" value="0" placeholder="0">
+    <button class="number-minus" type="button" aria-label="minus"
+            onclick="this.previousElementSibling.stepDown(); this.previousElementSibling.onchange();"></button>
+</span>
+            </div>
+          </li>
+
+          <li class="add-modal__li">
+            <label class="add-modal__label" id="modal-user-source">
+              <span class="add-modal__text">Source</span>
+            </label>
+          </li>
+
+          <li class="add-modal__li">
+            <div class="add-modal__label">
+              <span class="add-modal__text">Price</span>
+              <span class="number">
+    <button class="number-plus" type="button" aria-label="plus"
+            onclick="this.nextElementSibling.stepUp(); this.nextElementSibling.onchange();"></button>
+    <input type="number" min="0" value="0" placeholder="0">
+    <button class="number-minus" type="button" aria-label="minus"
+            onclick="this.previousElementSibling.stepDown(); this.previousElementSibling.onchange();"></button>
+</span>
+            </div>
+          </li>
+          <li class="add-modal__li">
+            <label class="add-modal__label" id="modal-type">
+              <span class="add-modal__text">Type:</span>
+            </label>
+          </li>
+
+          <li class="add-modal__li">
+            <label class="add-modal__label" id="format-user-modal">
+              <span class="add-modal__text">Format:</span>
+            </label>
+          </li>
+
+          <li class="add-modal__li" id="platform-radios">
+            <div class="add-modal__label">
+              <span class="add-modal__text">Platform:</span>
+              <div class="add-modal__radios">
+                <label class="radio">
+
+                  <input class="radio__input" type="radio" name="platform" value="Mobile">
+
+                  <span class="radio__oval"></span>
+                  <span class="radio__text">Mobile</span>
+                </label>
+
+                <label class="radio">
+
+                  <input class="radio__input" type="radio" name="platform" value="Desktop">
+
+                  <span class="radio__oval"></span>
+                  <span class="radio__text">Desktop</span>
+                </label>
+
+              </div>
+            </div>
+          </li>
+          <li class="add-modal__li hide" id="platform-os">
+            <div class="add-modal__label">
+              <span class="add-modal__text">OS</span>
+              <div class="add-modal__radios">
+                <label class="checkbox add-modal__checkbox">
+
+                  <input class="checkbox__input" type="checkbox">
+
+                  <span class="checkbox__box"></span>
+
+                  <span class="checkbox__text">Android</span>
+
+                </label>
+
+                <label class="checkbox add-modal__checkbox">
+
+                  <input class="checkbox__input" type="checkbox">
+
+                  <span class="checkbox__box"></span>
+
+                  <span class="checkbox__text">IOS</span>
+
+                </label>
+
+              </div>
+            </div>
+          </li>
+          <li class="add-modal__li hide" id="platform-desktop">
+            <div class="add-modal__label">
+              <span class="add-modal__text">OS</span>
+              <div class="add-modal__radios">
+                <label class="checkbox add-modal__checkbox">
+
+                  <input class="checkbox__input" type="checkbox">
+
+                  <span class="checkbox__box"></span>
+
+                  <span class="checkbox__text">Windows</span>
+
+                </label>
+
+                <label class="checkbox add-modal__checkbox">
+
+                  <input class="checkbox__input" type="checkbox">
+
+                  <span class="checkbox__box"></span>
+
+                  <span class="checkbox__text">macOS</span>
+
+                </label>
+
+                <label class="checkbox add-modal__checkbox">
+
+                  <input class="checkbox__input" type="checkbox">
+
+                  <span class="checkbox__box"></span>
+
+                  <span class="checkbox__text">Linux</span>
+
+                </label>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="add-modal__footer">
+          <label class="checkbox add-modal__footer-checkbox">
+
+            <input class="checkbox__input" type="checkbox">
+
+            <span class="checkbox__box"></span>
+
+            <span class="checkbox__text">Start after moderation </span>
+
+          </label>
+
+          <button class="add-modal__button button button_dark" type="button">
+            add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal" data-modal-name="edit-modal" role="alertdialog" aria-labelledby="edit-title"
+     aria-label="Edit campaign">
+  <div class="modal__holder"></div>
+  <div class="modal__container">
+    <button class="modal__close" aria-label="Close modal">
+      <span></span>
+      <span></span>
+    </button>
+    <div class="modal__content">
+      <form class="edit-modal__box">
+        <div class="edit-modal__title title" id="edit-title">
+          Edit campaign
+        </div>
+        <ul class="edit-modal__list">
+
+          <li class="edit-modal__item">
+            <label class="edit-modal__label">
+              <span class="edit-modal__text">Name</span>
+              <input class="edit-modal__input input" type="text" placeholder="Enter">
+            </label>
+          </li>
+          <li class="edit-modal__item">
+            <label class="edit-modal__label">
+              <span class="edit-modal__text">Link</span>
+              <input class="edit-modal__input input" type="text" placeholder="Enter">
+            </label>
+          </li>
+          <li class="edit-modal__item">
+            <div class="edit-modal__label">
+              <span class="edit-modal__text">Clicks per day</span>
+              <span class="number">
+    <button class="number-plus" type="button" aria-label="plus"
+            onclick="this.nextElementSibling.stepUp(); this.nextElementSibling.onchange();"></button>
+    <input type="number" min="0" value="0" placeholder="0">
+    <button class="number-minus" type="button" aria-label="minus"
+            onclick="this.previousElementSibling.stepDown(); this.previousElementSibling.onchange();"></button>
+</span>
+            </div>
+          </li>
+
+        </ul>
+        <button class="edit-modal__button button button_dark" type="button">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal" data-modal-name="delete-modal" role="alertdialog" aria-labelledby="delete-title"
+     aria-label="Are you want to delete it?">
+  <div class="modal__holder"></div>
+  <div class="modal__container">
+    <button class="modal__close" aria-label="Close modal">
+      <span></span>
+      <span></span>
+    </button>
+    <div class="modal__content delete">
+      <form class="delete-modal__box">
+        <div class="delete-modal__title title" id="delete-title">Are you want to delete it?</div>
+        <button class="delete-modal__button button button_dark" type="button">
+          delete
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

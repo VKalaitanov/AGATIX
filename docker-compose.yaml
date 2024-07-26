@@ -1,0 +1,43 @@
+# Определение версии Docker Compose и начало описания сервисов
+version: '3'
+
+services:
+  django:
+    # Сборка образа для сервиса django из текущей директории
+    build:
+      context: ./
+      dockerfile: ./deployment/app/Dockerfile
+    volumes:
+        - ./:/app
+#    restart: always
+    ports:
+      - "8001:8001"
+    depends_on:
+      - pgdb
+  nginx:
+      build:
+          context: ./deployment/nginx
+          dockerfile: Dockerfile
+      volumes:
+          - ./static/:/static
+          - ./media/:/media
+      depends_on:
+          - django
+          - pgdb
+      ports:
+          - '80:80'
+  pgdb:
+    # Использование готового образа postgres
+    image: postgres
+    # Задание переменных окружения для контейнера с postgres
+    environment:
+      - POSTGRES_DB=redirect_db
+      - POSTGRES_USER=redirect_user
+      - POSTGRES_PASSWORD=ASDKLA87SD6FG9875XCV
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdbdata: null

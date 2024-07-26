@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="page">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>agatix</title>
+    <meta name="description" content="Web App">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+  </head>
+
+<body>
+    <header class="header">
+  <div class="header__container container">
+    <a class="header__logo" href="user-index.html">
+      <img src="img/logo.svg" alt="Логотип" loading="lazy" width="157" height="49">
+    </a>
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li class="header__item">
+          <a class="header__link" href="user-index.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#home"></use>
+</svg> Home
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-campaign.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#users"></use>
+</svg> Campaign
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-statistics.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#graph"></use>
+</svg> Statistics
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-payments.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#money"></use>
+</svg> Payments
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header__info">
+      <div class="header__balance">
+        <svg class="sprite header__currency" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#oval-dollar"></use>
+</svg> 483.46
+      </div>
+      <div class="header__user">
+        <div class="header__content">
+          <div class="header__name">Victor</div>
+          <div class="header__mail small-text">test_victor@gmail.com</div>
+        </div>
+      </div>
+
+      <!-- if you need to use button just uncomment under code -->
+      <!--<button class="header__logout">
+        @<svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#logout"></use>
+</svg>
+      </button>-->
+      <a class="header__logout" href="login.html" aria-label="Logout">
+        <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#logout"></use>
+</svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+    <main class="main">
+        <div class="user">
+            <div class="container">
+                <div class="page-head">
+                    <div class="big-title">Hello, Victor_test!</div>
+                </div>
+                <div class="user__board">
+                    <ul class="user__cards">
+                        <li class="user__card user__card_megaphone">
+                            <a href="user-campaign.html" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Campaign</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#arrow"></use>
+</svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_headphone">
+                            <a href="https://t.me/s/AGATIX_SUPPORT" class="user__link" target="_blank">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Support</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#arrow"></use>
+</svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_graph">
+                            <a href="user-statistics.html" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Statistics</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#arrow"></use>
+</svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_wallet">
+                            <a href="user-payments.html" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Payments</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#arrow"></use>
+</svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+  <div class="footer__container container">
+    <ul class="footer__links">
+      <li class="footer__item">
+        <a href="#" class="footer__link">Privacy Policy</a>
+      </li>
+      <li class="footer__item"><a href="#" class="footer__link">Terms </a></li>
+      <li class="footer__item">
+        <a href="#" class="footer__link">Contacts</a>
+      </li>
+    </ul>
+    <div class="footer__terms">©️ 2024 Agatix. All Rights Reserved.</div>
+  </div>
+</footer>
+
+</body>
+
+</html>

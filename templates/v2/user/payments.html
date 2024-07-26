@@ -1,0 +1,144 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}Campaigns{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="main__wrapper">
+            <div class="main__container container">
+                <div class="page-head">
+                    <div class="big-title">Payments</div>
+                    <button class="button button_transparent" data-modal-id="add-invoice-payments">
+                        <svg class="sprite table__filter-icon" viewBox="0 0 24 24" width="24" height="24">
+                            <use href="{% static 'images/sprite.svg' %}#plus"></use>
+                        </svg>
+                        new invoice
+                    </button>
+                </div>
+                <div class="table__outer">
+                    <table class="user-payments__table">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Amount</td>
+                            <td>Type</td>
+                            <td>Status</td>
+                            <td>PDF</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for invoice in invoices %}
+                            <tr>
+                                <td>{{ invoice.id }}</td>
+                                <td>{{ invoice.amount }}</td>
+                                <td>{{ invoice.get_type_display }}</td>
+                                <td>
+                                    <div class="admin-invoices__td-status admin-invoices__td-status_{{ invoice.get_status.0 }}">{{ invoice.get_status.1 }}</div>
+                                    {#                                    <div class="user-payments__td-status user-payments__td-status_wait">{{ invoice.get_status.1 }}</div>#}
+                                </td>
+                                <td>
+
+                                    <a class="button-download @class"
+                                       href="{% url 'platform_main:user_invoice_download' invoice.id %}" download>
+                                        <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24"
+                                             height="25">
+                                            <use href="{% static 'images/sprite.svg' %}#download"></use>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination__footer">
+                    <div class="pagination__pages">
+                        <button class="pagination__page-arrow pagination__page-prev" aria-label="prev page">
+                            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="{% static 'images/sprite.svg' %}#small-arrow"></use>
+                            </svg>
+                        </button>
+                        <div class="pagination__page">
+                            Page 1
+                        </div>
+                        <button class="pagination__page-arrow pagination__page-next" aria-label="next page">
+                            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="{% static 'images/sprite.svg' %}#small-arrow"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal" data-modal-name="add-invoice-payments" role="alertdialog" aria-labelledby="add-title"
+         aria-label="Add new invoice">
+        <div class="modal__holder"></div>
+        <div class="modal__container">
+            <button class="modal__close" aria-label="Close modal">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="modal__content">
+                <form class="add-invoice-payments__box" method="post"
+                      action="{% url 'platform_main:user_invoice_create' %}" name="form_new_invoice">
+                    {% csrf_token %}
+                    <div class="add-invoice-payments__title title" id="add-title">Add new invoice</div>
+                    <ul class="add-invoice-payments__list">
+                        <li class="add-invoice-payments__item">
+                            <div class="add-invoice-payments__label">
+                                <span class="add-invoice-payments__text">Amount</span>
+                                <span class="number">
+    <button class="number-plus" type="button" aria-label="plus"
+            onclick="this.nextElementSibling.stepUp(); this.nextElementSibling.onchange();"></button>
+    <input type="number" min="0" value="0" placeholder="0" name="amount">
+    <button class="number-minus" type="button" aria-label="minus"
+            onclick="this.previousElementSibling.stepDown(); this.previousElementSibling.onchange();"></button>
+</span>
+                            </div>
+                        </li>
+                        <li class="add-modal__li">
+                            <label class="add-modal__label" id="user-payments-type">
+                                <span class="add-modal__text">Type:</span>
+                            </label>
+                        </li>
+                    </ul>
+                    <button class="add-invoice-payments__button button button_dark" type="submit">
+                        add
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        payType = [
+            {% for type in type_choices %}
+                {
+                    name: '{{ type.1 }}',
+                    value: '{{ type.0 }}',
+                },
+            {% endfor %}
+        ]
+        if (userTypeInvoceSelect) {
+            _userTypeInvoceSelect = new Treeselect({
+                parentHtmlContainer: userTypeInvoceSelect,
+                value: '',
+                options: payType,
+                isSingleSelect: true,
+                direction: 'bottom',
+                clearable: false,
+                searchable: false,
+                placeholder: 'Select',
+            })
+        }
+    </script>
+    <script src="{% static 'js/user.js' %}"></script>
+{% endblock %}

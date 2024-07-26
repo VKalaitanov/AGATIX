@@ -1,0 +1,77 @@
+{% extends "authorized_header.html" %}
+{% load static %}
+{% block title %} My campaigns {% endblock %}
+{% block scripts %}
+    <link rel="stylesheet" href={% static 'css/list_campaigns.css' %}>
+{% endblock %}
+{% block content %}
+    <a href="/campaigns/create">Create new campaign</a>
+    {% if campaigns %}
+        <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Daily clicks</td>
+                <td>Clicks today</td>
+                <td>Type</td>
+                <td>Format</td>
+                <td>Platform</td>
+                <td>OS</td>
+                <td>Geo</td>
+                <td>Price</td>
+                <td>Status</td>
+                <td>Statistics</td>
+            </tr>
+            {% for campaign in campaigns %}
+                <tr>
+                    <td>{{ campaign.id }}</td>
+                    <td>{{ campaign.name }}</td>
+                    <td>{{ campaign.clicks_per_day }}</td>
+                    <td>{{ campaign.clicks_today }}</td>
+                    <td>{{ campaign.get_type_display }}</td>
+                    <td>{{ campaign.get_format_display }}</td>
+                    <td>{{ campaign.get_platform_display }}</td>
+                    <td>{{ campaign.os_display }}</td>
+                    <td>{{ campaign.get_geo_display }}</td>
+                    <td>{{ campaign.price }}</td>
+                    <td>
+                        {% if campaign.next_status %}
+                            {{ campaign.current_status }} ({{ campaign.next_status }})
+                        {% else %}
+                            {{ campaign.current_status }}
+                        {% endif %}
+                        {% if campaign.current_status == "running" or campaign.next_status == "run_requested" %}
+                            <form method="post" action="../{{ campaign.id }}/stop_requested">
+                                {% csrf_token %}
+                                <input type="submit" value="Stop">
+                            </form>
+                        {% elif  campaign.current_status == "stopped" or campaign.next_status == "stop_requested" %}
+                            <form method="post" action="../{{ campaign.id }}/run_requested">
+                                {% csrf_token %}
+                                <input type="submit" value="Run">
+                            </form>
+                        {% endif %}
+                        {% if campaign.current_status == "stopped" %}
+                            <form method="post" action="{% url 'platform_main:campaigns_delete' campaign.id %}">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete">
+                            </form>
+                            <form method="get" action="{% url 'platform_main:campaigns_update' campaign.id %}">
+                                <input type="submit" value="Update">
+                            </form>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'platform_main:campaigns_statistics' campaign.id %}">
+                            <button>
+                                Show statistics
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>There are no campaigns.</p>
+    {% endif %}
+{% endblock %}

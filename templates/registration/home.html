@@ -1,0 +1,8 @@
+{% extends "authorized_header.html" %}
+{% load rest_framework %}
+{% block title %} My Profile {% endblock %}
+{% block content %}
+    <p>Hello, {{ name }}!</p>
+    <p>Email: {{ email }}</p>
+    <p>Balance: {{ balance }}</p>
+{% endblock %}

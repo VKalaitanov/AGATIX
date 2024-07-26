@@ -1,0 +1,14 @@
+{% extends "authorized_header.html" %}
+{% block title %} New campaign {% endblock %}
+{% load rest_framework %}
+{% block content %}
+    <form action="{% url 'platform_main:campaigns_create' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if not is_final %}
+            <p><input type="submit" value="Next"></p>
+        {% else %}
+            <p><input type="submit" value="Create"></p>
+        {% endif %}
+    </form>
+{% endblock %}

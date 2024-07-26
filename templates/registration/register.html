@@ -1,0 +1,22 @@
+{% load rest_framework %}
+{% load static %}
+
+<form action="{% url 'platform_main:login' %}" method="get">
+    <p>Have an account?</p>
+    <button>Login</button>
+</form>
+<form action="{% url 'platform_main:register' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Register"></p>
+</form>
+<p>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+</p>
+<p>
+    {% if message %}
+        {{ message }}
+    {% endif %}
+</p>

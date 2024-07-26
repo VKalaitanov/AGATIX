@@ -1,0 +1,28 @@
+{% load rest_framework %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/admin/campaigns/admin_authorized_header.css">
+    {% block styles %}{% endblock %}
+    <title>
+        {% block title %} Base {% endblock %}
+    </title>
+</head>
+{% block scripts %}{% endblock %}
+<header class="header">
+    <div class="logo"></div>
+    <nav class="navigation">
+        <ul class="menu">
+            <li><a href="{% url 'platform_main:admin_total_statistics' %}">Clicks</a></li>
+            <li><a href="{% url 'platform_main:admin_accounts_list' %}">Accounts</a></li>
+            <li><a href="{% url 'platform_main:admin_sources_list' %}">Sources</a></li>
+            <li><a href="{% url 'platform_main:admin_sources_prices' %}">Click prices</a></li>
+            <li><a href="{% url 'platform_main:admin_campaigns_list' %}">Campaigns</a></li>
+            <li><a href="{% url 'platform_main:admin_list_invoices' %}">Invoices</a></li>
+        </ul>
+    </nav>
+    <div class="user-info">
+    </div>
+</header>
+{% block content %}
+{% endblock %}

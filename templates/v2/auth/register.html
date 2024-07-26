@@ -1,0 +1,60 @@
+{% extends 'v2/auth/base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="page-wrapper">
+        <div class="auth">
+            <div class="auth__container">
+                <div class="auth__logo text-center">
+                    <img src="{% static 'images/logo.svg' %}" alt="Логотип" loading="lazy" width="157" height="49">
+                </div>
+                <form class="auth__form" action="{% url 'platform_main:register' %}" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <h1 class="auth__title big-title text-center">Register</h1>
+
+                    <p>
+                        {% if message %}
+                            {{ message }}
+                        {% endif %}
+                    </p>
+
+                    <input class="auth__input input" type="email" placeholder="Email" name="email" required>
+                    {% if form.errors.email %}
+                        <p>
+                            {{ form.errors.email }}
+                        </p>
+                    {% endif %}
+
+                    <input class="auth__input input" type="text" placeholder="Name" name="name" required>
+                    {% if form.errors.name %}
+                        <p>
+                            {{ form.errors.name }}
+                        </p>
+                    {% endif %}
+
+                    <input class="auth__input input" type="password" placeholder="Password" name="password" required>
+                    {% if form.errors.password %}
+                        <p>
+                            {{ form.errors.password }}
+                        </p>
+                    {% endif %}
+                    <button class="auth__button button button_yellow" type="submit">sign in</button>
+
+                    <div class="auth__bottom descr">
+                        <div class="auth__bottom-text">You have a login?</div>
+                        <a class="auth__bottom-link" href="{% url 'platform_main:login' %}">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

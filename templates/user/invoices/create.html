@@ -1,0 +1,14 @@
+{% extends "authorized_header.html" %}
+{% load static %}
+{% block title %} New invoice {% endblock %}
+{% load rest_framework %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Cofirm">
+    </form>
+    <form action="{% url 'platform_main:user_invoices_list' %}" method="get">
+        <button>Cancel</button>
+    </form>
+{% endblock %}

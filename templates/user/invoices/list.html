@@ -1,0 +1,38 @@
+{% extends "authorized_header.html" %}
+{% block title %} Your invoices {% endblock %}
+{% load rest_framework %}
+{% block content %}
+    <a href="/invoices/create">Create new invoice</a>
+    {% if invoices %}
+        <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+            <tr>
+                <td>ID</td>
+                <td>Amount</td>
+                <td>Type</td>
+                <td>Status</td>
+                <td>PDF</td>
+            </tr>
+            {% for invoice in invoices %}
+                <tr>
+                    <td>
+                        {{ invoice.id }}
+                    </td>
+                    <td>{{ invoice.amount }}</td>
+                    <td>{{ invoice.get_type_display }}</td>
+                    <td>
+                        {% if invoice.status %}
+                            Paid
+                        {% else %}
+                            Waiting
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'platform_main:user_invoice_download' invoice.id %}" target="_blank">
+                            <button>Download PDF</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

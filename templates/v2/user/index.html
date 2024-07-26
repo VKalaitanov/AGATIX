@@ -1,0 +1,72 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}User{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="user">
+            <div class="container">
+                <div class="page-head">
+                    <div class="big-title">Hello, {{ name }}!</div>
+                </div>
+                <div class="user__board">
+                    <ul class="user__cards">
+                        <li class="user__card user__card_megaphone">
+                            <a href="{% url 'platform_main:campaigns_list' %}" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Campaign</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_headphone">
+                            <a href="https://t.me/s/AGATIX_SUPPORT" class="user__link" target="_blank">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Support</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_graph">
+                            <a href="{% url 'platform_main:total_statistics' %}" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Statistics</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="user__card user__card_wallet">
+                            <a href="{% url 'platform_main:user_invoices_list' %}" class="user__link">
+                                <div class="user__wrap">
+                                    <div class="user__text small-title">Payments</div>
+                                    <div class="user__more">
+                                        <svg class="sprite user__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

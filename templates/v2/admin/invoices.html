@@ -1,0 +1,235 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}Invoices{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+
+    <main class="main">
+        <div class="main__wrapper">
+            <div class="main__container container">
+                <div class="page-head">
+                    <div class="big-title">Invoices</div>
+                </div>
+                <form action="/admin/invoices/list/" method="GET" id="search_form">
+                    <div class="table__filters">
+
+                        <div class="table__filter table__filter_search">
+                            <div class="table__filter-label">ID</div>
+                            <input id="name_or_id" name="name" type="text" class="input_search input"
+                                   value="{{ request.GET.name }}" placeholder="Enter">
+                        </div>
+                        <div class="table__filter table__filter_type" id="type">
+                            <div class="table__filter-label">Type</div>
+                            <div class="custom-select">
+                                <div class="custom-select-trigger">
+                                    <span class="selected-option"></span>
+                                </div>
+                                <div class="custom-options">
+                                    <span class="custom-option" data-value="">All</span>
+                                    {% for type in choices_type %}
+                                        <span class="custom-option" data-value="{{ type.0 }}">{{ type.1 }}</span>
+                                    {% endfor %}
+                                </div>
+                                <input type="hidden" name="type" value="{% for type in choices_type %}{% if type.0 in request.GET.type %}{{ type.0 }}{% endif %}{% endfor %}">
+                            </div>
+                        </div>
+
+                        <div class="table__filter table__filter_status" id="status">
+                            <div class="table__filter-label">Status</div>
+                            <div class="custom-select">
+                                <div class="custom-select-trigger">
+                                    <span class="selected-option"></span>
+                                </div>
+                                <div class="custom-options">
+                                    <span class="custom-option" data-value="">All</span>
+                                    {% for status in choices_status %}
+                                        <span class="custom-option" data-value="{{ status.0 }}">{{ status.1 }}</span>
+                                    {% endfor %}
+                                </div>
+                                <input type="hidden" name="status" value={% for status in choices_status %}{% if status.0 in request.GET.status %}{{ status.0 }}{% endif %}{% endfor %}>
+                            </div>
+                        </div>
+                        <div class="table__filter">
+                            <button class="button button_dark">apply</button>
+                        </div>
+                        <div class="table__filter">
+                            <button id='clear' class="button button_transparent">clear</button>
+                        </div>
+                    </div>
+                </form>
+            <script src="../../../static/js/custom-select.js"></script>
+              <script>
+                  document.getElementById('clear').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('name_or_id').value = '';
+
+    // Очистка выбранных опций в пользовательских Select
+    let customSelects = document.querySelectorAll('.custom-select');
+    customSelects.forEach((customSelect) => {
+        let selectedOption = customSelect.querySelector('.custom-option.is-selected');
+        if (selectedOption) {
+            selectedOption.classList.remove('is-selected');
+        }
+        let allOptions = customSelect.querySelectorAll('.custom-option');
+        allOptions.forEach((option) => {
+            if (option.dataset.value === '') {
+                option.classList.add('is-selected');
+            } else {
+                option.classList.remove('is-selected');
+            }
+        });
+        let selectedOptionElement = customSelect.querySelector('.selected-option');
+        selectedOptionElement.textContent = 'All';
+
+        // Очистка скрытого input-a
+        let hiddenInput = customSelect.querySelector('input[type="hidden"]');
+        hiddenInput.value = '';
+    });
+});
+              </script>
+                <div class="table__outer">
+                    <table class="admin-invoices__table">
+                        <thead>
+                        <tr>
+                            <td>Successful</td>
+                            <td>ID</td>
+                            <td>Amount</td>
+                            <td>Type</td>
+                            <td>Status</td>
+                            <td>PDF</td>
+                            {#                        <td>Actions</td>#}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for invoice in invoices %}
+                            <tr>
+                                <td><label class="checkbox admin-invoice__checkbox">
+
+                                    <input class="checkbox__input" type="checkbox">
+
+                                    <span class="checkbox__box"></span>
+
+                                </label>
+                                </td>
+                                <td>{{ invoice.id }}</td>
+                                <td>{{ invoice.amount }}</td>
+                                <td>{{ invoice.type }}</td>
+                                <td>
+                                    <div class="switcher admin-switcher invoices">
+                                        {#                                    <label class="switcher__button">#}
+                                        {#                                        <input class="switcher__input" name="campaign_status-{{ invoice.id }}" type="radio" value="stop"#}
+                                        {#                                              {% if not invoice.is_deleted %}checked{% endif %} disabled>#}
+                                        {#                                        Deleted#}
+                                        {#                                    </label>#}
+                                        <label class="switcher__button">
+                                            <input class="switcher__input" name="campaign_status-{{ invoice.id }}"
+                                                   type="radio" value="wait"
+                                                   {% if not invoice.paid %}checked{% endif %}
+                                                   onchange="invoice_status_handle(this, {{ invoice.id }})">
+                                            Waiting
+                                        </label>
+                                        <label class="switcher__button">
+                                            <input class="switcher__input" name="campaign_status-{{ invoice.id }}"
+                                                   type="radio" value="run"
+                                                   {% if invoice.paid %}checked{% endif %}
+                                                   onchange="invoice_status_handle(this, {{ invoice.id }})">
+                                            Paid
+                                        </label>
+                                        <div class="switcher__holder"></div>
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <a class="button-download @class"
+                                       href="{% url 'platform_main:admin_download_invoice' invoice.id %}" download>
+                                        <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24"
+                                             height="25">
+                                            <use href="{% static 'images/sprite.svg' %}#download"></use>
+                                        </svg>
+                                    </a>
+                                </td>
+                                {#                        <td>#}
+                                {#                            <div class="td-buttons">#}
+                                {##}
+                                {#                                <button class="button-delete @class" aria-label="remove" data-modal-id="delete-modal"#}
+                                {#                                    onclick="handle_delete_button(this, {{ invoice.id }})">#}
+                                {##}
+                                {#                                    <svg class="sprite button-delete__icon" viewBox="0 0 24 24" width="24" height="24">#}
+                                {#                                        <use href="{% static 'images/sprite.svg' %}#basket"></use>#}
+                                {#                                    </svg>#}
+                                {##}
+                                {#                                </button>#}
+                                {##}
+                                {#                            </div>#}
+                                {#                        </td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination__footer">
+                    <div class="pagination__pages">
+                        <button class="pagination__page-arrow pagination__page-prev" aria-label="prev page">
+                            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="{% static 'images/sprite.svg' %}#small-arrow"></use>
+                            </svg>
+                        </button>
+                        <div class="pagination__page">
+                            Page 1
+                        </div>
+                        <button class="pagination__page-arrow pagination__page-next" aria-label="next page">
+                            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <use href="{% static 'images/sprite.svg' %}#small-arrow"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" data-modal-name="delete-modal" role="alertdialog" aria-labelledby="delete-title"
+         aria-label="Are you want to delete it?">
+        <div class="modal__holder"></div>
+        <div class="modal__container">
+            <button class="modal__close" aria-label="Close modal">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="modal__content delete">
+                <form class="delete-modal__box" method="post" name="form_delete_invoice">
+                    {% csrf_token %}
+                    <div class="delete-modal__title title" id="delete-title">Are you want to delete it?</div>
+                    <button class="delete-modal__button button button_dark" type="submit">
+                        delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        async function invoice_status_handle(el, invoice_id) {
+            let url = `/admin/invoices/${invoice_id}/accept`
+
+            let response = await sendData(url, JSON.stringify({'status': el.value}))
+            let data = await response.json();
+            if (data.message === "ok") {
+
+            } else {
+                alert(data.errors)
+            }
+        }
+
+        function handle_delete_button(el, invoice_id) {
+            document.getElementsByName("form_delete_invoice")[0].action = `/admin/invoices/${invoice_id}/delete`
+        }
+    </script>
+{% endblock %}

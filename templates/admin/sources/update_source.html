@@ -1,0 +1,20 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+    <form action="{% url 'platform_main:admin_delete_source' object.id %}" method="post">{% csrf_token %}
+        <button>Delete source</button>
+    </form>
+    <form action="{% url 'platform_main:admin_sources_list' %}" method="get">
+        <button>Back to sources</button>
+    </form>
+{% endblock %}

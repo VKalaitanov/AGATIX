@@ -1,0 +1,217 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<div class="header__container container">
+    <a class="header__logo" href="{% url 'platform_main:home' %}">
+        <img src="{% static 'images/logo.svg' %}" alt="Логотип" loading="lazy" width="157" height="49">
+    </a>
+    <nav class="header__nav">
+        <ul class="header__list">
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:home' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#home"></use>
+                    </svg>
+                    Home
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:campaigns_list' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#users"></use>
+                    </svg>
+                    Campaign
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:total_statistics' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#graph"></use>
+                    </svg>
+                    Statistics
+                </a>
+            </li>
+            <li class="header__item">
+                <a class="header__link" href="{% url 'platform_main:user_invoices_list' %}">
+                    <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+                        <use href="{% static 'images/sprite.svg' %}#money"></use>
+                    </svg>
+                    Payments
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header__info">
+        <div class="header__balance">
+            <svg class="sprite header__currency" viewBox="0 0 24 24" width="24" height="24">
+                <use href="{% static 'images/sprite.svg' %}#oval-dollar"></use>
+            </svg>
+            {{ request.user.pretty_balance }}
+        </div>
+        <div class="header__user">
+            <div class="header__content">
+                <div id="change-credentials" class="header__name">{{ request.user.name }}</div>
+                <div class="header__mail small-text">{{ request.user.email }}</div>
+            </div>
+        </div>
+
+
+        <a class="header__logout" href="{% url 'platform_main:logout' %}" aria-label="Logout">
+            <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+                <use href="{% static 'images/sprite.svg' %}#logout"></use>
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="modal" data-modal-name="change-credentials" role="alertdialog" aria-labelledby="add-title"
+     aria-label="Add new invoice">
+    <div class="modal__holder"></div>
+    <div class="modal__container">
+        <button class="modal__close" aria-label="Close modal">
+            <span></span>
+            <span></span>
+        </button>
+        <div class="modal__content">
+            <form class="" method="post"
+                  id='change-email-password'>
+                {% csrf_token %}
+                <div class="add-invoice-payments__title title" id="">Change email & password</div>
+                <ul class="add-invoice-payments__list">
+                    <li class="add-invoice-payments__item">
+                        <div class="add-invoice-payments__label">
+                            <span class="add-invoice-payments__text">Email</span>
+
+
+                            <input type="email" class="input" placeholder="Enter a new email" name="email">
+                            <div class="email-error-message"></div>
+                        </div>
+                    </li>
+                    <li class="add-modal__li">
+                        <span class="add-modal__text">Password:</span>
+                        <div class="password-input-wrapper">
+                            <input class="input" type="password" placeholder="Enter a new password"
+                                   name="new_password" id="password-input" required>
+                            <button type="button" class="password-toggle-btn">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </div>
+                        <div class="password-error-message"></div>
+                    </li>
+                </ul>
+                <button id = 'confirm_button' class="add-invoice-payments__button button button_dark" type="submit">
+                    Confirm
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const password_i = document.getElementById('password-input');
+    const passwordToggleBtn = document.querySelector('.password-toggle-btn');
+    const passwordToggleIcon = passwordToggleBtn.querySelector('i');
+
+    passwordToggleBtn.addEventListener('click', () => {
+        if (password_i.type === 'password') {
+            password_i.type = 'text';
+            passwordToggleIcon.classList.remove('fa-eye-slash');
+            passwordToggleIcon.classList.add('fa-eye');
+        } else {
+            password_i.type = 'password';
+            passwordToggleIcon.classList.remove('fa-eye');
+            passwordToggleIcon.classList.add('fa-eye-slash');
+        }
+    });
+
+    let user_pas = document.getElementById('change-credentials')
+    let mod = document.querySelector(`[data-modal-name=${user_pas.getAttribute('id')}]`)
+    user_pas.style.cursor = 'pointer'
+    user_pas.addEventListener('click', () => {
+
+        document.body.classList.add("scroll-hidden")
+        let close_holder = [mod.querySelector('.modal__close'), mod.querySelector('.modal__holder')]
+        mod.classList.add('is-open')
+
+
+        close_holder.forEach((e) => {
+            e.addEventListener(('click'), () => {
+                mod.classList.remove('is-open')
+                document.body.classList.remove("scroll-hidden")
+            })
+        })
+    })
+
+    let change_form = document.getElementById('change-email-password');
+    let passwordErrorMessage = document.querySelector('.password-error-message');
+    let emailErrorMessage = document.querySelector('.email-error-message');
+
+    function validatePassword() {
+        let password = password_i.value;
+        let isValid = true;
+
+        // Проверка длины пароля
+        if (password.length < 8) {
+            passwordErrorMessage.textContent = 'Password must be at least 8 characters long.'
+            passwordErrorMessage.classList.add('password-error-change')
+            setTimeout(() => {
+                passwordErrorMessage.classList.remove('password-error-change')
+            }, 500)
+            isValid = false;
+        }
+        // Проверка надежности пароля (наличие букв)
+        else if (!/[a-zA-Z]/.test(password)) {
+            passwordErrorMessage.textContent = 'Password must contain at least one letter.';
+            passwordErrorMessage.classList.add('password-error-change')
+            setTimeout(() => {
+                passwordErrorMessage.classList.remove('password-error-change')
+            }, 500)
+            isValid = false;
+        } else {
+            passwordErrorMessage.textContent = '';
+        }
+
+
+        return isValid;
+    }
+
+    change_form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (validatePassword()) {
+            const formData = new FormData(e.target);
+
+            fetch('/change_password/', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'ok') {
+                        let confirm_button = document.getElementById('confirm_button')
+                        confirm_button.style.transition = '0.5s'
+                        confirm_button.style.backgroundColor = 'green'
+                        confirm_button.textContent = 'Success ✓'
+                        confirm_button.style.scale = '1.2'
+                        confirm_button.style.borderRadius = '20px'
+                        setTimeout(()=>{
+                            mod.classList.remove('is-open');
+                        document.body.classList.remove("scroll-hidden");
+                        }, 2000)
+                        setTimeout(()=>{
+                            window.location.reload()
+                        }, 1000)
+
+                    } else if (data.message === 'email already exists') {
+                        emailErrorMessage.textContent = 'Email already exists';
+                        emailErrorMessage.classList.add('email-error-change')
+                        setTimeout(() => {
+                            emailErrorMessage.classList.remove('email-error-change')
+                        }, 500)
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    });
+
+</script>

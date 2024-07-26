@@ -1,0 +1,14 @@
+{% extends "authorized_header.html" %}
+{% load static %}
+{% block title %} My campaigns {% endblock %}
+{% block scripts %}
+    <link rel="stylesheet" href={% static 'css/list_campaigns.css' %}>
+{% endblock %}
+{% block content %}
+    <form action="{% url 'platform_main:campaigns_update' object.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Save"></p>
+        <a href={% url 'platform_main:campaigns_list' %}>Back to campaigns list</a>
+    </form>
+{% endblock %}

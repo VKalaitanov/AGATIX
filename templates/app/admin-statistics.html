@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>agatix</title>
+    <meta name="description" content="Web App">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<header class="header">
+    <div class="header__container container">
+        <a class="header__logo" href="admin-index.html">
+            <img src="img/logo.svg" alt="Логотип" loading="lazy" width="157" height="49">
+        </a>
+        <nav class="header__nav">
+            <ul class="header__list">
+                <li class="header__item">
+                    <a class="header__link" href="admin-index.html"> Home </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-statistics.html">
+                        Statistics
+                    </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-campaign.html">
+                        Campaign
+                    </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-click-prices.html">
+                        Click prices
+                    </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-invoices.html">
+                        Invoices
+                    </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-sources.html"> Sources </a>
+                </li>
+                <li class="header__item">
+                    <a class="header__link" href="admin-accounts.html">
+                        Accounts
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header__info">
+            <div class="header__user">
+                <svg class="sprite header__user-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#user-shield"></use>
+                </svg>
+                <div class="header__content">
+                    <div class="header__name">Victor</div>
+                    <div class="header__mail small-text">test_victor@gmail.com</div>
+                </div>
+            </div>
+
+            <!-- if you need to use button just uncomment under code -->
+            <!--<button class="header__logout">
+              @<svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+          <use href="img/sprite.svg#logout"></use>
+      </svg>
+            </button>-->
+            <a class="header__logout" href="login.html" aria-label="Logout">
+                <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <use href="img/sprite.svg#logout"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="main__wrapper">
+        <div class="container">
+            <div class="page-head">
+                <div class="big-title">Statistics</div>
+            </div>
+
+            <ul class="tabs list-reset">
+                <li class="tab">
+                    <button class="tab__button" data-date="Today">Today</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Yesterday">Yesterday</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button tab__button_active" data-date="Current week">Current week</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Last week">Last week</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Current month">Current month</button>
+                </li>
+                <li class="tab">
+                    <button class="tab__button" data-date="Last month">Last Month</button>
+                </li>
+            </ul>
+
+            <div class="statistics__total">
+                <div class="statistics__total-title small-title">Total: 200 clicks</div>
+
+                <div class="switcher switcher_statistics admin-accounts__switcher">
+                    <label class="switcher__button">
+                        <input class="switcher__input" name="switch-1" type="radio" value="stop" checked>
+                        success
+                    </label>
+                    <label class="switcher__button">
+                        <input class="switcher__input" name="switch-1" type="radio" value="run">
+                        failed
+                    </label>
+                    <div class="switcher__holder"></div>
+                </div>
+
+            </div>
+
+            <div class="statistics__chart">
+                <canvas class="statistics__graph" id="admin-statistics-chart" aria-label="Chart" role="img"></canvas>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer__container container">
+        <ul class="footer__links">
+            <li class="footer__item">
+                <a href="#" class="footer__link">Privacy Policy</a>
+            </li>
+            <li class="footer__item"><a href="#" class="footer__link">Terms </a></li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Contacts</a>
+            </li>
+        </ul>
+        <div class="footer__terms">©️ 2024 Agatix. All Rights Reserved.</div>
+    </div>
+</footer>
+
+</body>
+
+</html>

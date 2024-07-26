@@ -1,0 +1,34 @@
+{% extends "authorized_header.html" %}
+{% block title %} All campaigns statistics {% endblock %}
+{% load rest_framework %}
+{% block content %}
+    <div class="settings">
+        <form action="{% url 'platform_main:total_statistics' %}" method="get">
+            <label for="selectStatisticsBy">Statistics by</label>
+            <select name="statistics_by" id="selectStatisticsBy">
+                <option>All Time</option>
+                <option>Last Month</option>
+                <option>Current Month</option>
+                <option>Last 30 Days</option>
+                <option>Today</option>
+                <option>Yesterday</option>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>Clicks</th>
+            <th>Total amount</th>
+        </tr>
+        {% for click in clicks %}
+            <tr>
+                <th>{{ click.at }}</th>
+                <th>{{ click.clicks }}</th>
+                <th>{{ click.amount }}$</th>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

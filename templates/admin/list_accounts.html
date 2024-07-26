@@ -1,0 +1,61 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+
+{% block content %}
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        <tr>
+            <th>id</th>
+            {% if accounts %}
+                <th></th>
+                <th></th>
+                <th></th>
+            {% endif %}
+            <th>Manager</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Company name</th>
+            <th>Total clicks per day</th>
+            <th>Balance</th>
+        </tr>
+        {% for account in accounts %}
+            <tr>
+                <th>{{ account.id }}</th>
+                <th>
+                    <form action="{% url 'platform_main:admin_account_stop' account.id %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-default">
+                            {% if account.is_stopped %}
+                                <img class="signs" src={% static "admin/campaigns/start.svg" %}>
+                            {% else %}
+                                <img class="signs" src={% static "admin/campaigns/stop.svg" %}>
+                            {% endif %}
+                        </button>
+                    </form>
+                </th>
+                <th>
+                    <form action="{% url 'platform_main:admin_account_delete' account.id %}" method="post" novalidate>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-default">
+                            <img class="signs" src={% static "admin/campaigns/bin.svg" %}>
+                        </button>
+                    </form>
+                </th>
+                <th>
+                    <form action="{% url 'platform_main:admin_account' account.id %}" method="get">
+                        <button>Edit</button>
+                    </form>
+                </th>
+                <th>{{ account.manager }}</th>
+                <th>{{ account.name }}</th>
+                <th>{{ account.email }}</th>
+                <th>{{ account.company }}</th>
+                <th>{{ account.clicks_per_day_total }}</th>
+                <th>{{ account.balance }}$</th>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#111111">
+  <title>agatix</title>
+  <meta name="description" content="Web App">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script defer src="js/main.js"></script>
+</head>
+
+<body>
+<header class="header">
+  <div class="header__container container">
+    <a class="header__logo" href="user-index.html">
+      <img src="img/logo.svg" alt="Логотип" loading="lazy" width="157" height="49">
+    </a>
+    <nav class="header__nav">
+      <ul class="header__list">
+        <li class="header__item">
+          <a class="header__link" href="user-index.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#home"></use>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-campaign.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#users"></use>
+            </svg>
+            Campaign
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-statistics.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#graph"></use>
+            </svg>
+            Statistics
+          </a>
+        </li>
+        <li class="header__item">
+          <a class="header__link" href="user-payments.html">
+            <svg class="sprite header__icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#money"></use>
+            </svg>
+            Payments
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header__info">
+      <div class="header__balance">
+        <svg class="sprite header__currency" viewBox="0 0 24 24" width="24" height="24">
+          <use href="img/sprite.svg#oval-dollar"></use>
+        </svg>
+        483.46
+      </div>
+      <div class="header__user">
+        <div class="header__content">
+          <div class="header__name">Victor</div>
+          <div class="header__mail small-text">test_victor@gmail.com</div>
+        </div>
+      </div>
+
+      <!-- if you need to use button just uncomment under code -->
+      <!--<button class="header__logout">
+        @<svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+    <use href="img/sprite.svg#logout"></use>
+</svg>
+      </button>-->
+      <a class="header__logout" href="login.html" aria-label="Logout">
+        <svg class="sprite header__logout-icon" viewBox="0 0 24 24" width="24" height="24">
+          <use href="img/sprite.svg#logout"></use>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="main__wrapper">
+    <div class="main__container container">
+      <div class="page-head">
+        <div class="big-title">Payments</div>
+        <button class="button button_transparent" data-modal-id="add-invoice-payments">
+          <svg class="sprite table__filter-icon" viewBox="0 0 24 24" width="24" height="24">
+            <use href="img/sprite.svg#plus"></use>
+          </svg>
+          new invoice
+        </button>
+      </div>
+      <div class="table__outer">
+        <table class="user-payments__table">
+          <thead>
+          <tr>
+            <td>ID</td>
+            <td>Amount</td>
+            <td>Type</td>
+            <td>Status</td>
+            <td>PDF</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>2</td>
+            <td>500</td>
+            <td>Capitalist</td>
+            <td>
+              <div class="user-payments__td-status user-payments__td-status_wait">waiting</div>
+            </td>
+            <td>
+
+              <a class="button-download @class" href="#" download>
+                <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24" height="25">
+                  <use href="img/sprite.svg#download"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>100</td>
+            <td>USDT</td>
+            <td>
+              <div class="user-payments__td-status user-payments__td-status_paid">paid</div>
+            </td>
+            <td>
+
+              <a class="button-download @class" href="#" download>
+                <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24" height="25">
+                  <use href="img/sprite.svg#download"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+
+          <!-- under is all repeat you can dalete code under -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+
+          <tr>
+            <td>4</td>
+            <td>250</td>
+            <td>Bank</td>
+            <td>
+              <div class="user-payments__td-status user-payments__td-status_wait">waiting</div>
+            </td>
+            <td>
+
+              <a class="button-download @class" href="#" download>
+                <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24" height="25">
+                  <use href="img/sprite.svg#download"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>111</td>
+            <td>Bank</td>
+            <td>
+              <div class="user-payments__td-status user-payments__td-status_paid">paid</div>
+            </td>
+            <td>
+
+              <a class="button-download @class" href="#" download>
+                <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24" height="25">
+                  <use href="img/sprite.svg#download"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>1 000</td>
+            <td>Bank</td>
+            <td>
+              <div class="user-payments__td-status user-payments__td-status_wait">waiting</div>
+            </td>
+            <td>
+
+              <a class="button-download @class" href="#" download>
+                <svg class="sprite button-download__icon" viewBox="0 0 24 25" width="24" height="25">
+                  <use href="img/sprite.svg#download"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          <!--  -->
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination__footer">
+        <div class="pagination__pages">
+          <button class="pagination__page-arrow pagination__page-prev" aria-label="prev page">
+            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#small-arrow"></use>
+            </svg>
+          </button>
+          <div class="pagination__page">
+            Page 1
+          </div>
+          <button class="pagination__page-arrow pagination__page-next" aria-label="next page">
+            <svg class="sprite pagination__page-icon" viewBox="0 0 24 24" width="24" height="24">
+              <use href="img/sprite.svg#small-arrow"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer__container container">
+    <ul class="footer__links">
+      <li class="footer__item">
+        <a href="#" class="footer__link">Privacy Policy</a>
+      </li>
+      <li class="footer__item"><a href="#" class="footer__link">Terms </a></li>
+      <li class="footer__item">
+        <a href="#" class="footer__link">Contacts</a>
+      </li>
+    </ul>
+    <div class="footer__terms">©️ 2024 Agatix. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<div class="modal" data-modal-name="add-invoice-payments" role="alertdialog" aria-labelledby="add-title"
+     aria-label="Add new invoice">
+  <div class="modal__holder"></div>
+  <div class="modal__container">
+    <button class="modal__close" aria-label="Close modal">
+      <span></span>
+      <span></span>
+    </button>
+    <div class="modal__content">
+      <form class="add-invoice-payments__box">
+        <div class="add-invoice-payments__title title" id="add-title">Add new invoice</div>
+        <ul class="add-invoice-payments__list">
+          <li class="add-invoice-payments__item">
+            <div class="add-invoice-payments__label">
+              <span class="add-invoice-payments__text">Amount</span>
+              <span class="number">
+    <button class="number-plus" type="button" aria-label="plus"
+            onclick="this.nextElementSibling.stepUp(); this.nextElementSibling.onchange();"></button>
+    <input type="number" min="0" value="0" placeholder="0">
+    <button class="number-minus" type="button" aria-label="minus"
+            onclick="this.previousElementSibling.stepDown(); this.previousElementSibling.onchange();"></button>
+</span>
+            </div>
+          </li>
+          <li class="add-modal__li">
+            <label class="add-modal__label" id="user-payments-type">
+              <span class="add-modal__text">Type:</span>
+            </label>
+          </li>
+        </ul>
+        <button class="add-invoice-payments__button button button_dark" type="button">
+          add
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

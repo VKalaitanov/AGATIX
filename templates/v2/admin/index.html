@@ -1,0 +1,96 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}Admin{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="admin">
+            <div class="container">
+                <div class="page-head">
+                    <div class="big-title">Hello, {{ request.user.name }}!</div>
+                </div>
+                <div class="admin__board">
+                    <ul class="admin__cards">
+                        <li class="admin__card admin__card_megaphone">
+                            <a href="{% url 'platform_main:admin_campaigns_list' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Campaign</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="admin__card admin__card_price">
+                            <a href="{% url 'platform_main:admin_sources_prices' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Click prices</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="admin__card admin__card_earth">
+                            <a href="{% url 'platform_main:admin_sources_prices' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Sources</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="admin__card admin__card_graph">
+                            <a href="{% url 'platform_main:admin_total_statistics' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Statistics</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="admin__card admin__card_wallet">
+                            <a href="{% url 'platform_main:admin_list_invoices' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Invoices</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="admin__card admin__card_account">
+                            <a href="{% url 'platform_main:admin_accounts_list' %}" class="admin__link">
+                                <div class="admin__wrap">
+                                    <div class="admin__text small-title">Accounts</div>
+                                    <div class="admin__more">
+                                        <svg class="sprite admin__icon" viewBox="0 0 24 24" width="24" height="24">
+                                            <use href="{% static 'images/sprite.svg' %}#arrow"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

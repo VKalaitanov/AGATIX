@@ -1,0 +1,23 @@
+{% load rest_framework %}
+
+<html>
+<body>
+
+<h2>Admin Log-in</h2>
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p><input type="submit" value="Log-in"></p>
+</form>
+<p>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+</p>
+<p>
+    {% if message %}
+        {{ message }}
+    {% endif %}
+</p>
+</body>
+</html>

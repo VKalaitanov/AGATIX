@@ -1,0 +1,56 @@
+{% extends "admin_authorized_header.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href={% static 'admin/campaigns/admin_authorized_header.css' %}>
+    <link rel="stylesheet" href={% static 'admin/campaigns/list_campaigns.css' %}>
+{% endblock %}
+
+{% block content %}
+    {% if user.is_admin %}
+        <form action="{% url 'platform_main:admin_sources_prices_create' %}" method="get">
+            <button>Create new price</button>
+        </form>
+    {% endif %}
+    <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+        <tr>
+            <th>Source ID</th>
+            <th>Source name</th>
+            <th>Type</th>
+            <th>Format</th>
+            <th>Platform</th>
+            <th>Geo</th>
+            <th>Price</th>
+        </tr>
+        {% for price in sources_prices %}
+            <tr>
+                <th>
+                    {{ price.source.system_id }}
+                    {% if user.is_admin %}
+                        <form action="{% url 'platform_main:admin_delete_source_price' price.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Удалить">
+                        </form>
+                    {% endif %}
+                </th>
+                <th>{{ price.source.name }}</th>
+                <th>{{ price.get_type_display }}</th>
+                <th>{{ price.get_format_display }}</th>
+                <th>{{ price.get_platform_display }}</th>
+                <th>{{ price.get_geo_display }}</th>
+                {% if user.is_admin %}
+                    <th>
+                        <form action="{% url 'platform_main:admin_update_source_price' price.id %}" method="post">
+                            {% csrf_token %}
+                            <input name="price" type="number" value={{ price.price }}>
+                            <input type="submit" value="Save">
+                        </form>
+                    </th>
+                {% else %}
+                    <th>
+                        {{ price.price }}
+                    </th>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

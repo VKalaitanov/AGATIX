@@ -1,0 +1,65 @@
+.mainTable{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.settings{
+    width: 100%;
+    background-color: rgb(221, 221, 221);
+    height: 50px;
+}
+
+.settings form{
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.settings select{
+    font-size: 10px
+}
+
+.settings input{
+    font-size: 10px;
+    width: 160px;
+    margin-right: 10px;
+}
+
+.signs{
+    width: 20px;
+}
+
+.start{
+    background-color: rgb(105, 171, 105);
+    width: 30px;
+    text-align: center;
+}
+
+.stop{
+    background-color: rgb(197, 141, 139);
+    width: 30px;
+    text-align: center;
+}
+
+.startBut{
+    background-image: url('start.svg');
+}
+
+.stopBut{
+    background-image: url('stop.svg');
+}
+
+#selectorCount{
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+.showCount{
+    font-size: 10px;
+    display: inline-block;
+    margin-right: -10px;
+}
+

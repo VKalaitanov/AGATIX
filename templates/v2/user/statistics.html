@@ -1,0 +1,121 @@
+{% extends 'v2/base.html' %}
+{% load static %}
+
+{% block title %}Campaigns{% endblock %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <div class="main__wrapper">
+            <div class="container">
+                <div class="page-head">
+                    <div class="big-title">Statistics</div>
+                </div>
+
+                <ul class="tabs list-reset">
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Today" %}tab__button_active{% endif %}"
+                                    data-date="Today" name="statistics_by" value="Today">Today
+                            </button>
+                        </form>
+                    </li>
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Yesterday" %}tab__button_active{% endif %}"
+                                    data-date="Yesterday" name="statistics_by" value="Yesterday">Yesterday
+                            </button>
+                        </form>
+                    </li>
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Current week" %}tab__button_active{% endif %}"
+                                    data-date="Current week" name="statistics_by" value="Current week">Current week
+                            </button>
+                        </form>
+                    </li>
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Last week" %}tab__button_active{% endif %}"
+                                    data-date="Last week" name="statistics_by" value="Last week">Last week
+                            </button>
+                        </form>
+                    </li>
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Current month" %}tab__button_active{% endif %}"
+                                    data-date="Current month" name="statistics_by" value="Current month">Current month
+                            </button>
+                        </form>
+                    </li>
+                    <li class="tab">
+                        <form action="{% url 'platform_main:campaigns_statistics' campaign_id %}" method="get">
+                            <button class="tab__button {% if request.GET.statistics_by == "Last month" %}tab__button_active{% endif %}"
+                                    data-date="Last month" name="statistics_by" value="Last month">Last month
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+
+                <div class="statistics__total">
+                    <div class="statistics__total-title small-title">Total: {{ total_clicks}} clicks</div>
+                    <div class="statistics__total-text">Spent:
+                        <div class="statistics__total-balance">${{ total_amount }}</div>
+                    </div>
+                </div>
+
+                <div class="statistics__chart">
+                    <canvas class="statistics__graph" id="statistics-chart-2" aria-label="Chart" role="img"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+        let userChartGlobal;
+        let userChart = document.getElementById('statistics-chart-2');
+        if (userChart) {
+            userChartGlobal = new Chart(userChart, {
+                type: 'bar',
+                data: {
+                    labels: [{% for click in clicks %} "{{ click.at|date:'j/M/Y' }}",{% endfor %}],
+                    datasets: [{
+                        label: 'clicks',
+                        backgroundColor: "#ffe100",
+                        borderRadius: 20,
+                        maxBarThickness: function (context) {
+                            return context.dataset.data.length === 1 ? 300 : undefined;
+                        },
+                        data: [{% for click in clicks %} {{ click.clicks }},{% endfor %}]
+                    },]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            stacked: true
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

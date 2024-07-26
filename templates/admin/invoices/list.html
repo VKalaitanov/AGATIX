@@ -1,0 +1,54 @@
+{% extends "admin_authorized_header.html" %}
+{% block title %} Invoices {% endblock %}
+{% load rest_framework %}
+{% block content %}
+    {% if invoices %}
+        <table class="mainTable" border="1" bordercolor="black" cellspacing="0">
+            <tr>
+                <td>ID</td>
+                <td>Amount</td>
+                <td>Payment type</td>
+                <td>Status</td>
+                <td>PDF</td>
+                {% if user.is_admin %}
+                    <td>Actions</td>
+                {% endif %}
+            </tr>
+            {% for invoice in invoices %}
+                <tr>
+                    <td>
+                        {{ invoice.id }}
+                    </td>
+                    <td>{{ invoice.amount }}</td>
+                    <td>{{ invoice.get_type_display }}</td>
+                    <td>
+                        {% if invoice.paid %}
+                            Paid
+                        {% else %}
+                            Waiting for payment
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form action="{% url 'platform_main:admin_download_invoice' invoice.id %}" target="_blank">
+                            <button>Download PDF</button>
+                        </form>
+                    </td>
+                    {% if user.is_admin %}
+                        <td>
+                            {% if not invoice.paid %}
+                                <form action="{% url 'platform_main:admin_accept_invoice' invoice.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">Payment successful</button>
+                                </form>
+                            {% endif %}
+                            <form action="{% url 'platform_main:admin_delete_invoice' invoice.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
