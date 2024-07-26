@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django.shortcuts import reverse
+from django.shortcuts import reverse, redirect
 
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.request import Request
@@ -53,3 +53,7 @@ class LogoutView(View):
     def get(request: Request):
         logout(request)
         return HttpResponseRedirect(reverse('platform_main:login'))
+
+
+def home_redirect(request):
+    return redirect('platform_main:login')

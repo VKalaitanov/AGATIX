@@ -4,9 +4,11 @@ from platform_main.views.admin import *
 from platform_main.views.integration import *
 from platform_main.views.user.campaigns import get_statistic, get_min_price
 from platform_main.views.user.register import ChangePassword
+from platform_main.views.user.login import home_redirect
 
 urlpatterns = [
     # User
+    path('', home_redirect, name='start'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('login/', LoginView.as_view(), name='login'),
     path('home/', HomeView.as_view(), name='home'),
