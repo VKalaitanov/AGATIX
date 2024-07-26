@@ -18,6 +18,7 @@ SECRET_KEY = 'django-insecure-v+!8#5h=b5^rzyst-m1+-w#i9lx_a8a#==&tu^p5a$(vps4n19
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 CSRF_TRUSTED_ORIGINS = [
     'https://agatix.click',
     'http://38.180.40.117',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django_apscheduler'
 ]
 
-CSRF_TRUSTED_ORIGINS = ['http://38.180.40.117']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
